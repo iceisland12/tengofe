@@ -4,15 +4,14 @@ namespace App\Models;
 
 class Database {
     protected $db;
+
     public function __construct()
     {
-        $this->DB = new \mysqli('localhost', 'root', '', 'twofactor');
+        $this->db = new \mysqli('localhost', 'root', '', 'twofactor');
     }
 
     public function __destruct()
     {
         $this->db->close();
     }
-
 }
-

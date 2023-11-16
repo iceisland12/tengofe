@@ -13,7 +13,7 @@
     <div class="row justify-content-md-center">
         <div class="col col-md-6">
             <h3>Nueva cuenta</h3><hr/>
-            <form>
+            <form id="register-form">
                 <div class="form-group">
                     <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name">
@@ -34,5 +34,30 @@
     </div>
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script>
+    document.getElementById('register-form').onsubmit = (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+    
+        if (!email || !name || !password){
+            return;
+        }
+
+        axios.post('api/register.php', {email: email, name: name, password: password})
+            .then(res => {
+                // Redirect to
+                console.log(res)
+            })
+            .catch(err=>{
+                console.log(err.response.data)
+            })
+    }
+</script>
 </body>
 </html>

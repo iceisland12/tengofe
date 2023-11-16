@@ -4,10 +4,10 @@ namespace App\Models;
 
 class User extends Database {
 
-    public function register($name, $password, $email){
-        $query = $this->db->prepare("INSERT INTO user (name, password, email) VALUES(?,?,?)");
+    public function register($name, $email, $password){
+        $query = $this->db->prepare("INSERT INTO users (name, email, password) VALUES(?,?,?)");
         $hash = password_hash($password,PASSWORD_DEFAULT);
-        $query->bind_param('sss', $name, $password, $email);
+        $query->bind_param('sss', $name, $email, $hash);
         $query->execute();
         $insertedId = $query->insert_id;
         $query->close();
